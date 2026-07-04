@@ -1,6 +1,7 @@
 ﻿import requests
 import json
 import os
+import sys
 import logging
 from enum import Enum
 from typing import Dict, List, Optional, Tuple, Union
@@ -439,6 +440,7 @@ logger = init_logger()
 
 def main():
     """主函数"""
+    all_failed = True
     try:
         logger.info(f"{LogEmoji.START} 步骤 1: 加载配置")
         config = Config()
@@ -454,10 +456,21 @@ def main():
             title, content, log_content = checker.format_results()
             logger.info(f"\n{LogEmoji.END}========== 签到总结 ==========\n{title}\n{log_content}")
 
+            # 检查是否所有域名都签到失败
+            results = checker.get_results()
+            for r in results:
+                if r["code"] == CheckinStatus.SUCCESS:
+                    all_failed = False
+                    break
+
     except Exception as e:
         logger.error(f"{LogEmoji.ERROR} 主程序执行过程中发生未预期的错误: {e}")
+        sys.exit(1)
 
     logger.info(f"{LogEmoji.END} 签到完成")
+    if all_failed:
+        logger.error(f"{LogEmoji.ERROR} 所有域名签到均失败，触发通知")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
