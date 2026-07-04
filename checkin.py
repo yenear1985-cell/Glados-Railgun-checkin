@@ -459,7 +459,7 @@ def main():
             # 检查是否所有域名都签到失败
             results = checker.get_results()
             for r in results:
-                if r["code"] == CheckinStatus.SUCCESS:
+                if r["code"] == CheckinStatus.SUCCESS or r["code"] == CheckinStatus.REPEAT:
                     all_failed = False
                     break
 
