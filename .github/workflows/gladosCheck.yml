@@ -48,15 +48,6 @@ jobs:
         GLADOS_EXCHANGE_PLAN: ${{ secrets.GLADOS_EXCHANGE_PLAN }}
         GLADOS_VERBOSE: ${{ secrets.GLADOS_VERBOSE }}
 
-    - name: Delete workflow runs
-      uses: Mattraks/delete-workflow-runs@v2
-      with:
-        token: ${{ github.token }}
-        repository: ${{ github.repository }}
-        retain_days: 7
-        keep_minimum_runs: 7
-        delete_run_by_conclusion_pattern: success
-
     - name: Create Issue on failure
       if: failure()
       uses: actions/github-script@v7
