@@ -4,9 +4,10 @@ Daily sign-in automation with auto exchange, deployed on GitHub Actions.
 
 ## Features
 
-- Automated daily sign-in via GitHub Actions (UTC 04:00 and 10:00)
-- Multi-domain support (glados.cloud, railgun.info)
+- Automated daily sign-in via GitHub Actions (Beijing 03:26, UTC 19:26)
+- Three-domain rotation: glados.cloud → railgun.info → glados.one
 - Points query and auto-exchange (plan100 / plan200 / plan500)
+- All logs displayed in Beijing time
 - Failure notification via GitHub Issue + email
 
 ## Usage
@@ -19,8 +20,8 @@ Daily sign-in automation with auto exchange, deployed on GitHub Actions.
 
 ## Notification
 
-- All domains succeed or at least one succeeds → no notification
-- All domains fail → GitHub creates an Issue automatically and sends an email to your account's email address
+- At least one domain succeeds → no notification
+- All three domains fail → GitHub creates an Issue automatically and sends an email to your account's email address
 
 ## Credits
 
